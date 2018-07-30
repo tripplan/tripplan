@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const CleanWebpackPlugin = require("clean-webpack-plugin")
+const path = require("path")
 
 module.exports = {
     devServer: {
@@ -18,7 +19,8 @@ module.exports = {
         publicPath: "/"
     },
     resolve: {
-        extensions: ["*", ".js", ".jsx"]
+        extensions: ["*", ".js", ".jsx"],
+        modules: [path.resolve("./src"), path.resolve("./node_modules")]
     },
     plugins: [
         new CleanWebpackPlugin(["dist"]),
