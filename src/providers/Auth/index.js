@@ -6,11 +6,11 @@ export const AuthConsumer = AuthContext.Consumer
 export default class extends Component {
     state = {
         loggedIn: false,
-        logIn: () => {
-            this.setState({ loggedIn: true })
+        logIn: user => {
+            this.setState({ loggedIn: true, user })
         },
         logOut: () => {
-            this.setState({ loggedIn: false })
+            this.setState({ loggedIn: false, user: undefined })
         }
     }
     render = () => (
