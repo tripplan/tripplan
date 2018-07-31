@@ -11,12 +11,6 @@ export default () => (
             <li>
                 <Link to="/trips">Trips</Link>
             </li>
-            <li>
-                <Link to="/trips/1234">Trip 1234</Link>
-            </li>
-            <li>
-                <Link to="/trips/1234/abc">Trip 1234 -> abc</Link>
-            </li>
         </ul>
         <Login />
         <hr />

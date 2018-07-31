@@ -3,7 +3,7 @@ import React from "react"
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import NavBar from "components/NavBar"
 import PrivateRoute from "containers/PrivateRoute"
-import TripsPage from "containers/TripsPage"
+import TripsRoutes from "containers/TripsRoutes"
 import HomePage from "containers/HomePage"
 
 export default () => (
@@ -11,7 +11,7 @@ export default () => (
         <React.Fragment>
             <NavBar />
             <Route exact path="/" component={HomePage} />
-            <PrivateRoute path="/trips" component={TripsPage} />
+            <PrivateRoute path="/trips" component={TripsRoutes} />
         </React.Fragment>
     </Router>
 )
