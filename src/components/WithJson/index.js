@@ -1,14 +1,23 @@
 import React from "react"
 
-const withJson = (name, url) => BaseComponent => {
+const WithJSON = (name, getUrl, shouldRefetch = () => false) => BaseComponent => {
     return class extends React.Component {
         state = {
             json: undefined
         }
-        componentDidMount() {
+        fetchData = () => {
+            const url = getUrl(this.props);
             fetch(url)
                 .then(res => res.json())
                 .then(json => this.setState({ json }))
+        }
+        componentDidMount() {
+            this.fetchData()
+        }
+        componentDidUpdate(prevProps) {
+            if (shouldRefetch(prevProps, this.props)) {
+                this.fetchData()
+            }
         }
         render() {
             const jsonProp = {
@@ -19,4 +28,4 @@ const withJson = (name, url) => BaseComponent => {
     }
 }
 
-export default withJson
+export default WithJSON

@@ -16,9 +16,9 @@ class App extends React.Component /*::<Props, State> */ {
     render() {
         return (
             <AuthProvider>
-                <TripsProviderWithAuth>
-                    <Routes />
-                </TripsProviderWithAuth>
+                {/* <TripsProviderWithAuth> */}
+                <Routes />
+                {/* </TripsProviderWithAuth> */}
             </AuthProvider>
         )
     }
