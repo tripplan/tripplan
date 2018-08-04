@@ -1,30 +1,43 @@
 import React from "react"
 
-const WithJSON = (name, getUrl, shouldRefetch = () => false) => BaseComponent => {
-    return class extends React.Component {
-        state = {
-            json: undefined
-        }
-        fetchData = () => {
-            const url = getUrl(this.props);
-            fetch(url)
-                .then(res => res.json())
-                .then(json => this.setState({ json }))
-        }
-        componentDidMount() {
-            this.fetchData()
-        }
-        componentDidUpdate(prevProps) {
-            if (shouldRefetch(prevProps, this.props)) {
-                this.fetchData()
+class WithJSON extends React.Component {
+    state = {
+        json: this.props.fallback,
+        url: "",
+        err: undefined
+    }
+    _fetchData = () => {
+        const { url } = this.props
+        fetch(url)
+            .then(res => res.json())
+            .then(json => this.setState({ json, err: undefined }))
+            .catch(err =>
+                this.setState({
+                    json: undefined,
+                    err
+                })
+            )
+    }
+    componentDidMount() {
+        this._fetchData()
+    }
+    static getDerivedStateFromProps({ url }, state) {
+        if (url !== state.url) {
+            return {
+                json: undefined,
+                err: undefined,
+                url
             }
         }
-        render() {
-            const jsonProp = {
-                [name]: this.state.json
-            }
-            return <BaseComponent {...jsonProp} {...this.props} />
+        return null
+    }
+    componentDidUpdate(prevProps) {
+        if (prevProps.url !== this.state.url) {
+            this._fetchData()
         }
+    }
+    render() {
+        return this.props.children(this.state)
     }
 }
 
