@@ -3,9 +3,5 @@ import { WithAuth } from "providers/Auth"
 
 export default WithAuth(
     ({ auth }) =>
-        auth.loggedIn && (
-            <button onClick={() => auth.logOut()}>
-                Log out {auth.user.name}!
-            </button>
-        )
+        auth.loggedIn && <button onClick={() => auth.logOut()}>Log out {auth.user.name}!</button>
 )

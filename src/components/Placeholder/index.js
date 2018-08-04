@@ -42,8 +42,9 @@ export default class extends React.Component {
 
     render() {
         const { showPlaceholder } = this.state
-        const { children, ready, fallback = null } = this.props
+        const { children, render, ready, fallback = null } = this.props
+        const rndr = children || render
 
-        return ready ? children : showPlaceholder ? fallback : null
+        return ready ? rndr() : showPlaceholder ? fallback() : null
     }
 }

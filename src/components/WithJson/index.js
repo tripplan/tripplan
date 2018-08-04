@@ -1,22 +1,44 @@
 import React from "react"
 
-const withJson = (name, url) => BaseComponent => {
-    return class extends React.Component {
-        state = {
-            json: undefined
-        }
-        componentDidMount() {
-            fetch(url)
-                .then(res => res.json())
-                .then(json => this.setState({ json }))
-        }
-        render() {
-            const jsonProp = {
-                [name]: this.state.json
+class WithJSON extends React.Component {
+    state = {
+        json: this.props.fallback,
+        url: "",
+        err: undefined
+    }
+    _fetchData = () => {
+        const { url } = this.props
+        fetch(url)
+            .then(res => res.json())
+            .then(json => this.setState({ json, err: undefined }))
+            .catch(err =>
+                this.setState({
+                    json: undefined,
+                    err
+                })
+            )
+    }
+    componentDidMount() {
+        this._fetchData()
+    }
+    static getDerivedStateFromProps({ url, fallback }, state) {
+        if (url !== state.url) {
+            return {
+                json: undefined,
+                err: undefined,
+                url
             }
-            return <BaseComponent {...jsonProp} {...this.props} />
         }
+        return null
+    }
+    componentDidUpdate(prevProps) {
+        if (prevProps.url !== this.state.url) {
+            this._fetchData()
+        }
+    }
+    render() {
+        return this.props.children(this.state)
     }
 }
 
-export default withJson
+export default WithJSON
