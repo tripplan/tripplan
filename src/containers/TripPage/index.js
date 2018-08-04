@@ -4,10 +4,11 @@ import TripDetails from "components/TripDetails"
 import { Link } from "react-router-dom"
 import Placeholder from "components/Placeholder"
 import Spinner from "components/Spinner"
+import api from "api"
 
 export default ({ match }) => {
-    const tripID = match.params.tripID
-    const url = `http://localhost:3000/trips?_embed=destinations&id=${tripID}`
+    const tripId = match.params.tripId
+    const url = api.db.trips.getUrl(`?_embed=destinations&id=${tripId}`)
     return (
         <WithJSON url={url}>
             {({ json = [] }) => (

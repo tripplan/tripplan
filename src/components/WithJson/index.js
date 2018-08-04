@@ -2,7 +2,7 @@ import React from "react"
 
 class WithJSON extends React.Component {
     state = {
-        json: this.props.fallback,
+        json: undefined,
         url: "",
         err: undefined
     }
@@ -21,7 +21,7 @@ class WithJSON extends React.Component {
     componentDidMount() {
         this._fetchData()
     }
-    static getDerivedStateFromProps({ url, fallback }, state) {
+    static getDerivedStateFromProps({ url }, state) {
         if (url !== state.url) {
             return {
                 json: undefined,

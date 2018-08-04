@@ -4,9 +4,10 @@ import WithJSON from "components/WithJSON"
 import { Link } from "react-router-dom"
 import Placeholder from "components/Placeholder"
 import Spinner from "components/Spinner"
+import api from "api"
 
 const HomePage = ({ auth }) => (
-    <WithJSON url="http://localhost:3000/people">
+    <WithJSON url={api.db.people.getUrl()}>
         {({ json }) => (
             <React.Fragment>
                 <h3>HOME PAGE</h3>

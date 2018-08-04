@@ -2,8 +2,8 @@ import React from "react"
 import { Link } from "react-router-dom"
 
 const DestinationCard = ({ destination }) => {
-    const { tripID, id, title } = destination
-    const destinationUrl = `/trips/${tripID}/${id}`
+    const { tripId, id, title } = destination
+    const destinationUrl = `/trips/${tripId}/${id}`
     return (
         <div>
             <Link to={destinationUrl}>{title}</Link>
