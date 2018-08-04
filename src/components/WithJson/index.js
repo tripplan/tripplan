@@ -21,7 +21,7 @@ class WithJSON extends React.Component {
     componentDidMount() {
         this._fetchData()
     }
-    static getDerivedStateFromProps({ url }, state) {
+    static getDerivedStateFromProps({ url, fallback }, state) {
         if (url !== state.url) {
             return {
                 json: undefined,
