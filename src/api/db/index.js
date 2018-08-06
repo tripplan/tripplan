@@ -19,9 +19,7 @@ const helper = (url, name) => ({
             }
         })
     },
-    getUrl: (query = "") => {
-        return `${url}/${name}${query}`
-    }
+    query: q => `${url}/${name}${q || ""}`
 })
 
 const db = url => ({

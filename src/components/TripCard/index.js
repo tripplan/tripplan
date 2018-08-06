@@ -1,6 +1,4 @@
-import React from "react"
 import _ from "lodash"
-import { Link } from "react-router-dom"
 
 const TripCard = ({ trip }) => {
     const min = _.minBy(trip.destinations, "startDate")

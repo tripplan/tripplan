@@ -1,4 +1,3 @@
-import React from "react"
 import { WithAuth } from "providers/Auth"
 import { Route } from "react-router-dom"
 

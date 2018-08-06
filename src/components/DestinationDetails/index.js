@@ -1,5 +1,3 @@
-import React from "react"
-
 const DestinationDetails = ({ destination }) => (
     <div>
         <h3>{destination.title}</h3>

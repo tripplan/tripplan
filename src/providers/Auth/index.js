@@ -1,9 +1,7 @@
-import React, { Component } from "react"
-
 export const AuthContext = React.createContext()
 export const AuthConsumer = AuthContext.Consumer
 
-export default class extends Component {
+export default class extends React.Component {
     state = {
         loggedIn: false,
         logIn: user => {
@@ -14,9 +12,7 @@ export default class extends Component {
         }
     }
     render = () => (
-        <AuthContext.Provider value={this.state}>
-            {this.props.children}
-        </AuthContext.Provider>
+        <AuthContext.Provider value={this.state}>{this.props.children}</AuthContext.Provider>
     )
 }
 

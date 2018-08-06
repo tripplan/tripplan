@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const CleanWebpackPlugin = require("clean-webpack-plugin")
+const webpack = require("webpack")
 const path = require("path")
 
 module.exports = {
@@ -34,6 +35,10 @@ module.exports = {
         new CleanWebpackPlugin(["dist"]),
         new HtmlWebpackPlugin({
             template: "src/index.html"
+        }),
+        new webpack.ProvidePlugin({
+            React: "react",
+            Link: ["react-router-dom", "Link"]
         })
     ]
 }

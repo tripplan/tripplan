@@ -1,5 +1,3 @@
-import React from "react"
-
 class WithJSON extends React.Component {
     state = {
         json: undefined,
@@ -37,7 +35,9 @@ class WithJSON extends React.Component {
         }
     }
     render() {
-        return this.props.children(this.state)
+        const { children, render } = this.props
+        const rndr = children || render
+        return rndr(this.state)
     }
 }
 
