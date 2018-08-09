@@ -1,22 +1,25 @@
+const headers = {
+    "Content-type": "application/json; charset=UTF-8"
+}
 const helper = (url, name) => ({
     add: body => {
-        const method = body.id ? "PUT" : "POST"
-        const sufix = body.id ? `/${body.id}` : ""
-
-        return fetch(`${url}/${name}${sufix}`, {
-            method,
+        return fetch(`${url}/${name}`, {
+            method: "POST",
             body: JSON.stringify(body),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
+            headers
+        })
+    },
+    update: body => {
+        return fetch(`${url}/${name}/${body.id}`, {
+            method: "PATCH",
+            body: JSON.stringify(body),
+            headers
         })
     },
     delete: id => {
         return fetch(`${url}/${name}/${id}`, {
             method: "DELETE",
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
+            headers
         })
     },
     query: q => `${url}/${name}${q || ""}`

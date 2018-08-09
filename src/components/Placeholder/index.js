@@ -1,5 +1,3 @@
-import React from "react"
-
 export default class extends React.Component {
     state = {
         showPlaceholder: false
@@ -29,10 +27,7 @@ export default class extends React.Component {
         const { ready, delayMS = 0 } = this.props
         clearTimeout(this.delayTimeout)
         if (!ready) {
-            this.delayTimeout = setTimeout(
-                () => this.setState({ showPlaceholder: true }),
-                delayMS
-            )
+            this.delayTimeout = setTimeout(() => this.setState({ showPlaceholder: true }), delayMS)
         }
     }
 

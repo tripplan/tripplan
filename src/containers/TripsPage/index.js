@@ -10,7 +10,7 @@ export default WithAuth(({ auth }) => {
     const url = api.db.trips.query(`?_embed=destinations&people_like=${auth.user.id}`)
     return (
         <WithJSON url={url}>
-            {({ json }) => (
+            {({ json, refresh }) => (
                 <Page>
                     <Link to={`/`}>{"<- Home"}</Link>
                     <h3>TRIPS PAGE</h3>
@@ -18,9 +18,12 @@ export default WithAuth(({ auth }) => {
                         <h1>ADD NEW TRIP</h1>
                         <button
                             onClick={() =>
-                                api.db.trips.add({
-                                    title: "TEST"
-                                })
+                                api.db.trips
+                                    .add({
+                                        title: "TEST",
+                                        people: [auth.user.id]
+                                    })
+                                    .then(refresh, console.error)
                             }
                         >
                             ADD

@@ -8,22 +8,24 @@ import UserCard from "components/UserCard"
 import api from "api"
 
 class HomePage extends React.Component {
-    renderUserCard = user => {
-        const { auth } = this.props
-        return <UserCard className="my-4" user={user} onClick={() => auth.logIn(user)} />
-    }
     renderLayout = ({ json }) => {
         const { auth } = this.props
         return (
             <Page>
                 <h3>HOME PAGE</h3>
                 {auth.user && <Link to={`/trips`}>{"Trips ->"}</Link>}
-                <Placeholder
-                    delayMS={500}
-                    ready={json}
-                    fallback={Spinner}
-                    render={() => json.map(this.renderUserCard)}
-                />
+                <Placeholder delayMS={500} ready={json} fallback={Spinner}>
+                    {() =>
+                        json.map(user => (
+                            <UserCard
+                                key={user.id}
+                                className="my-4"
+                                user={user}
+                                onClick={() => auth.logIn(user)}
+                            />
+                        ))
+                    }
+                </Placeholder>
             </Page>
         )
     }

@@ -2,16 +2,19 @@ class WithJSON extends React.Component {
     state = {
         json: undefined,
         url: "",
-        err: undefined
+        err: undefined,
+        refresh: () => {}
     }
     _fetchData = () => {
         const { url } = this.props
+        const refresh = this._fetchData
         fetch(url)
             .then(res => res.json())
-            .then(json => this.setState({ json, err: undefined }))
+            .then(json => this.setState({ json, err: undefined, refresh }))
             .catch(err =>
                 this.setState({
                     json: undefined,
+                    refresh,
                     err
                 })
             )
@@ -24,6 +27,7 @@ class WithJSON extends React.Component {
             return {
                 json: undefined,
                 err: undefined,
+                refresh: () => {},
                 url
             }
         }
