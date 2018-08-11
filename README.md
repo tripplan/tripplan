@@ -7,4 +7,4 @@ npm install
 npm start
 ```
 
-![Alt text](charts/SHOULDWORK.svg?raw=true "Title")
+<img src="./charts/SHOULDWORK.svg" alt="SHOULDWORK" height="400px"/>
