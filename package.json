@@ -4,9 +4,10 @@
     "description": "",
     "private": true,
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "jest",
+        "dgram": "jest --config ./dgram/jest.config.js",
         "start": "webpack-dev-server --open --hot --history-api-fallback --mode development",
-        "build": "webpack"
+        "build": "jest && webpack"
     },
     "author": "",
     "license": "ISC",
@@ -14,6 +15,7 @@
         "bootstrap": "^4.1.3",
         "fs-extra": "^7.0.0",
         "install": "^0.12.1",
+        "lodash": "^4.17.10",
         "mermaid.cli": "^0.5.1",
         "npm": "^6.3.0",
         "react": "^16.4.1",

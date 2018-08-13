@@ -1,4 +1,5 @@
-const fs = require("fs")
+const fs = require("fs-extra")
+const _ = require("lodash")
 
 var d3 = Object.assign(
     {},
@@ -15,7 +16,7 @@ const jsdom = require("jsdom")
 const { JSDOM } = jsdom
 const { document } = new JSDOM(`...`).window
 
-const chart = () => {
+const chart = data => {
     const node = document.createElementNS("http://www.w3.org/2000/svg", "svg")
     const svg = d3
         .select(node)
@@ -144,87 +145,44 @@ const color = name => {
 const width = 800
 const height = 300
 
-const data = {
-    nodes: [
-        {
-            name: "Losses"
-        },
-        {
-            name: "District heating"
-        },
-        {
-            name: "Carlos Baute"
-        },
-        {
-            name: "Jessica ling"
-        },
-        {
-            name: "Mauro Vim"
-        },
-        {
-            name: "YYYUUU Vim"
-        },
-        {
-            name: "VVZXVA Vim"
-        },
-        {
-            name: "casdqwe Vim"
-        }
-    ],
-    links: [
-        {
-            source: 0,
-            target: 1,
-            value: 200
-        },
-        {
-            source: 0,
-            target: 2,
-            value: 100
-        },
-        {
-            source: 0,
-            target: 3,
-            value: 100
-        },
-        {
-            source: 1,
-            target: 4,
-            value: 100
-        },
-        {
-            source: 2,
-            target: 4,
-            value: 100
-        },
-        {
-            source: 3,
-            target: 4,
-            value: 100
-        },
-        {
-            source: 4,
-            target: 5,
-            value: 100
-        },
-        {
-            source: 5,
-            target: 6,
-            value: 200
-        },
-        {
-            source: 0,
-            target: 7,
-            value: 50
-        }
-    ]
+let __queue = []
+let __name = ""
+let end = () => {
+    const dir = "./charts"
+    fs.ensureDir(dir).then(() => {
+        const dupNodes = _.flatMap(__queue, link => {
+            return [{ name: link.source }, { name: link.target }]
+        })
+
+        const nodes = _.uniqBy(dupNodes, "name")
+        const links = _.map(__queue, link => {
+            return {
+                source: nodes.findIndex(node => node.name === link.source),
+                target: nodes.findIndex(node => node.name === link.target),
+                value: link.value
+            }
+        })
+        let n = chart({ nodes, links })
+
+        let div = document.createElement("div")
+        div.append(n)
+
+        fs.writeFileSync(`${dir}/${__name}.svg`, div.innerHTML)
+        __queue = []
+    })
 }
+let push = (...args) => __queue.push(...args)
 
-let n = chart()
-
-let div = document.createElement("div")
-div.append(n)
-
-fs.writeFileSync("./asd.svg", div.innerHTML)
-
-module.exports = () => {}
+module.exports = {
+    begin: name => {
+        __name = name
+    },
+    connect: (source, target, value) => {
+        return push({
+            source,
+            target,
+            value
+        })
+    },
+    end
+}
