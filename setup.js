@@ -1,0 +1,1 @@
+if (!process.env.DGRAM) jest.mock("dygram")
