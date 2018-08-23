@@ -1,6 +1,5 @@
 import { WithAuth } from "providers/Auth"
 import WithJSON from "components/WithJSON"
-import { Link } from "react-router-dom"
 import Placeholder from "components/Placeholder"
 import Spinner from "components/Spinner"
 import Page from "components/Page"

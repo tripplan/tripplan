@@ -7,7 +7,7 @@
         "test": "jest",
         "dgram": "export DGRAM=true && jest",
         "start": "webpack-dev-server --open --hot --history-api-fallback --mode development",
-        "build": "jest && webpack"
+        "build": "npm run dgram && webpack"
     },
     "author": "",
     "license": "ISC",
@@ -30,6 +30,7 @@
         "babel-preset-stage-2": "^6.24.1",
         "clean-webpack-plugin": "^0.1.19",
         "css-loader": "^1.0.0",
+        "dygram": "^0.1.1",
         "flow-bin": "^0.75.0",
         "html-webpack-plugin": "^3.2.0",
         "jest": "^23.5.0",
