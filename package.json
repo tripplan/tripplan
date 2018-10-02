@@ -9,9 +9,6 @@
         "start": "webpack-dev-server --open --hot --history-api-fallback --mode development",
         "build": "npm run dgram && webpack"
     },
-    "hooks": {
-        "pre-commit": "lint-staged"
-    },
     "author": "",
     "license": "ISC",
     "dependencies": {
@@ -49,6 +46,7 @@
         "jest": "^23.5.0",
         "lint-staged": "^7.3.0",
         "node-sass": "^4.9.2",
+        "prettier": "^1.14.3",
         "react-hot-loader": "^4.3.3",
         "sass-loader": "^7.1.0",
         "style-loader": "^0.21.0",
@@ -58,6 +56,11 @@
     },
     "jest": {
         "setupTestFrameworkScriptFile": "./setup.js"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
     },
     "lint-staged": {
         "*.{js,json,css,md}": [
