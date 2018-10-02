@@ -4,18 +4,20 @@
     "description": "",
     "private": true,
     "scripts": {
-        "precommit": "lint-staged",
         "test": "jest",
         "dgram": "export DGRAM=true && jest",
         "start": "webpack-dev-server --open --hot --history-api-fallback --mode development",
         "build": "npm run dgram && webpack"
+    },
+    "hooks": {
+        "pre-commit": "lint-staged"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
         "bootstrap": "^4.1.3",
         "lodash": "^4.17.10",
-        "npm": "^6.3.0",
+        "npm": "^6.4.1",
         "react": "^16.4.1",
         "react-dom": "^16.4.1",
         "react-router-dom": "^4.3.1",
@@ -43,6 +45,7 @@
         "dygram": "^0.1.1",
         "flow-bin": "^0.75.0",
         "html-webpack-plugin": "^3.2.0",
+        "husky": "^1.1.0",
         "jest": "^23.5.0",
         "lint-staged": "^7.3.0",
         "node-sass": "^4.9.2",
