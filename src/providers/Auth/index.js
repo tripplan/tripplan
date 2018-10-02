@@ -1,7 +1,7 @@
 export const AuthContext = React.createContext()
-export const AuthConsumer = AuthContext.Consumer
 
 export default class extends React.Component {
+    static Consumer = AuthContext.Consumer
     state = {
         loggedIn: false,
         logIn: user => {

@@ -1,6 +1,6 @@
 // @flow
 import { hot } from "react-hot-loader"
-import Routes from "components/Routes"
+import Routes from "containers/Routes"
 import AuthProvider from "providers/Auth"
 
 /*::

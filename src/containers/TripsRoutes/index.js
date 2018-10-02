@@ -1,14 +1,13 @@
-import React from "react"
 import { Route, Switch } from "react-router-dom"
 
-import DestinationPage from "containers/DestinationPage"
-import TripPage from "containers/TripPage"
-import TripsPage from "containers/TripsPage"
+import Destination from "pages/Destination"
+import Trip from "pages/Trip"
+import Trips from "pages/Trips"
 
 export default ({ match: { url } }) => (
     <Switch>
-        <Route path={`${url}/:tripId/:destId`} component={DestinationPage} />
-        <Route path={`${url}/:tripId`} component={TripPage} />
-        <Route path={`${url}`} component={TripsPage} />
+        <Route path={`${url}/:tripId/:destId`} component={Destination} />
+        <Route path={`${url}/:tripId`} component={Trip} />
+        <Route path={`${url}`} component={Trips} />
     </Switch>
 )

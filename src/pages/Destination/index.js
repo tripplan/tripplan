@@ -1,5 +1,5 @@
-import WithJSON from "components/WithJSON"
-import DestinationDetails from "components/DestinationDetails"
+import Fetch from "components/Fetch"
+import DestinationDetails from "containers/DestinationDetails"
 import Placeholder from "components/Placeholder"
 import Spinner from "components/Spinner"
 import Page from "components/Page"
@@ -8,14 +8,14 @@ import api from "api"
 export default ({ match }) => {
     const destId = match.params.destId
     const tripId = match.params.tripId
-    const url = api.db.destinations.query(`?_embed=notes&id=${destId}`)
+    const url = `?_embed=notes&id=${destId}`
     return (
-        <WithJSON url={url}>
-            {({ json = [], refresh }) => (
+        <Fetch url={url} using={api.db.destinations.query}>
+            {({ response = [], refresh }) => (
                 <Page>
                     <Link to={`/trips/${tripId}`}>{"<- Trip"}</Link>
                     <h3>DESTINATION PAGE</h3>
-                    <Placeholder delayMS={500} ready={json[0]} fallback={Spinner}>
+                    <Placeholder delayMS={500} ready={response[0]} fallback={Spinner}>
                         {() => (
                             <div>
                                 <div>
@@ -36,12 +36,12 @@ export default ({ match }) => {
                                         ADD
                                     </button>
                                 </div>
-                                <DestinationDetails destination={json[0]} />
+                                <DestinationDetails destination={response[0]} />
                             </div>
                         )}
                     </Placeholder>
                 </Page>
             )}
-        </WithJSON>
+        </Fetch>
     )
 }

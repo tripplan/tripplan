@@ -1,5 +1,5 @@
 import _ from "lodash"
-import DestinationCard from "components/DestinationCard"
+import DestinationCard from "containers/DestinationCard"
 
 const TripDetails = ({ trip }) => {
     let dates = null
@@ -18,7 +18,9 @@ const TripDetails = ({ trip }) => {
         <div>
             <div>{trip.title}</div>
             {dates}
-            {trip.people.map((p, i) => <div key={i}>{p}</div>)}
+            {trip.people.map((p, i) => (
+                <div key={i}>{p}</div>
+            ))}
             {trip.destinations.map(destination => (
                 <DestinationCard key={destination.id} destination={destination} />
             ))}

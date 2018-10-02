@@ -1,19 +1,31 @@
-class WithJSON extends React.Component {
+class Fetch extends React.Component {
+    static defaultProps = {
+        as: "json",
+        using: fetch
+    }
     state = {
-        json: undefined,
+        response: undefined,
         url: "",
         err: undefined,
         refresh: () => {}
     }
     _fetchData = () => {
-        const { url } = this.props
+        const { url, using, as } = this.props
+        const process = typeof as === "string" ? r => r[as]() : as
         const refresh = this._fetchData
-        fetch(url)
-            .then(res => res.json())
-            .then(json => this.setState({ json, err: undefined, refresh }))
+
+        using(url)
+			.then(process)
+			.then(response =>
+                this.setState({
+                    response,
+                    err: undefined,
+                    refresh
+                })
+            )
             .catch(err =>
                 this.setState({
-                    json: undefined,
+                    response: undefined,
                     refresh,
                     err
                 })
@@ -25,7 +37,7 @@ class WithJSON extends React.Component {
     static getDerivedStateFromProps({ url }, state) {
         if (url !== state.url) {
             return {
-                json: undefined,
+                response: undefined,
                 err: undefined,
                 refresh: () => {},
                 url
@@ -45,4 +57,4 @@ class WithJSON extends React.Component {
     }
 }
 
-export default WithJSON
+export default Fetch
