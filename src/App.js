@@ -9,6 +9,7 @@ type Props = {}
 type State = {}
 */
 
+// test
 class App extends React.Component /*::<Props, State> */ {
     render = () => (
         <AuthProvider>
