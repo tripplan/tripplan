@@ -9,8 +9,6 @@ type Props = {}
 type State = {}
 */
 
-//         test
-const asdasda = 123
 class App extends React.Component /*::<Props, State> */ {
     render = () => (
         <AuthProvider>
