@@ -21,10 +21,10 @@ export default ({ trip, onDelete, header, to }) => (
             <CardTitle>{header}</CardTitle>
             <CardSubtitle>
                 {utils.getMinAndMaxStartDate(trip.destinations).map((date, i) => (
-                    <>
+                    <div key={i}>
                         <span className="mr-3">{date}</span>
                         {i === 0 && <small className="mr-3">to</small>}
-                    </>
+                    </div>
                 ))}
             </CardSubtitle>
             <CardText>{trip.description}</CardText>
