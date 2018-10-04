@@ -5,31 +5,22 @@ import Spinner from "components/Spinner"
 import Page from "components/Page"
 import UserCard from "containers/UserCard"
 import api from "api"
+import { Button } from "reactstrap"
 
 class HomePage extends React.Component {
-    renderLayout = ({ response }) => {
+    render() {
         const { auth } = this.props
         return (
             <Page>
                 <h3>HOME PAGE</h3>
                 {auth.user && <Link to={`/trips`}>{"Trips ->"}</Link>}
-                <Placeholder delayMS={500} ready={response} fallback={Spinner}>
-                    {() =>
-                        response.map(user => (
-                            <UserCard
-                                key={user.id}
-                                className="my-4"
-                                user={user}
-                                onClick={() => auth.logIn(user)}
-                            />
-                        ))
-                    }
-                </Placeholder>
+                {!auth.user && (
+                    <Button onClick={() => (window.location.href = `http://localhost:3000/login`)}>
+                        LOG IN
+                    </Button>
+                )}
             </Page>
         )
-    }
-    render() {
-        return <Fetch using={api.db.people.query} render={this.renderLayout} />
     }
 }
 

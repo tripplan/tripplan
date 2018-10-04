@@ -3,7 +3,7 @@ import { Button } from "reactstrap"
 
 const LogOutBtn = ({ auth }) => {
     return auth.loggedIn ? (
-        <Button onClick={() => auth.logOut()}>Log out {auth.user.name}!</Button>
+        <Button onClick={() => auth.logOut()}>Log out {auth.user.displayName}</Button>
     ) : null
 }
 

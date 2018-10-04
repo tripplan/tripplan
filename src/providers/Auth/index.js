@@ -11,6 +11,11 @@ export default class extends React.Component {
             this.setState({ loggedIn: false, user: undefined })
         }
     }
+    componentDidMount() {
+        fetch("http://localhost:3000/profile", {
+            credentials: "include"
+        }).then(r => r.json().then(this.state.logIn))
+    }
     render = () => (
         <AuthContext.Provider value={this.state}>{this.props.children}</AuthContext.Provider>
     )
