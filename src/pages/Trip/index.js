@@ -23,6 +23,7 @@ export default class extends React.Component {
                             onClick={() =>
                                 api.db.destinations
                                     .add({
+                                        people: response[0].people,
                                         title: "No Title",
                                         image:
                                             "https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180",

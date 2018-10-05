@@ -24,6 +24,7 @@ export default ({ match }) => {
                                         onClick={() =>
                                             api.db.notes
                                                 .add({
+                                                    people: response[0].people,
                                                     title: "TEST NOTE",
                                                     destinationId: parseInt(destId),
                                                     category: "TEST CATEGORY",

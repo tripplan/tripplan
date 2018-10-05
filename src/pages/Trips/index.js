@@ -48,7 +48,7 @@ class Component extends React.Component {
     )
     render() {
         const { auth } = this.props
-        const url = `?_embed=destinations&people_like=${auth.user.id}`
+        const url = `?_embed=destinations`
         return <Fetch url={url} using={api.db.trips.query} render={this.renderLayout} />
     }
 }
