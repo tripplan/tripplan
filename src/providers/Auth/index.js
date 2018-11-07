@@ -1,20 +1,19 @@
 export const AuthContext = React.createContext()
+import api from "api"
 
 export default class extends React.Component {
     static Consumer = AuthContext.Consumer
     state = {
         loggedIn: false,
-        logIn: user => {
-            this.setState({ loggedIn: true, user })
-        },
-        logOut: () => {
-            this.setState({ loggedIn: false, user: undefined })
-        }
+        logIn: () => api.logIn(),
+        logOut: () => api.logOut()
+    }
+    setUser = user => {
+        user = user.id ? user : undefined
+        this.setState({ loggedIn: !!user, user })
     }
     componentDidMount() {
-        fetch("http://localhost:3000/profile", {
-            credentials: "include"
-        }).then(r => r.json().then(this.state.logIn))
+        api.profile.fetch().then(this.setUser)
     }
     render = () => (
         <AuthContext.Provider value={this.state}>{this.props.children}</AuthContext.Provider>

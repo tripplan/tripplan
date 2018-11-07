@@ -1,35 +1,33 @@
-const credentials = "include"
-const headers = {
-    "Content-type": "application/json; charset=UTF-8"
+const options = {
+    credentials: "include",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
 }
 export default (url, name) => ({
     add: body => {
         return fetch(`${url}/${name}`, {
+            ...options,
             method: "POST",
-            body: JSON.stringify(body),
-            headers,
-            credentials
+            body: JSON.stringify(body)
         })
     },
     update: body => {
         return fetch(`${url}/${name}/${body.id}`, {
+            ...options,
             method: "PATCH",
-            body: JSON.stringify(body),
-            headers,
-            credentials
+            body: JSON.stringify(body)
         })
     },
     delete: id => {
         return fetch(`${url}/${name}/${id}`, {
-            method: "DELETE",
-            headers,
-            credentials
+            ...options,
+            method: "DELETE"
         })
     },
     query: q => {
         return fetch(`${url}/${name}${q || ""}`, {
-            headers,
-            credentials
+            ...options
         })
     }
 })

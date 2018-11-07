@@ -4,6 +4,7 @@ import Fields from "./Fields"
 const Context = React.createContext({})
 
 export default class extends React.Component {
+    static registerField = (k, v) => Fields.registerField(k, v)
     static Fields = props => (
         <Context.Consumer>{state => <Fields {...state} {...props} />}</Context.Consumer>
     )
