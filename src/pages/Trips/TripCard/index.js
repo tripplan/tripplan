@@ -1,16 +1,5 @@
-import TripForm from "containers/TripForm"
-import Form from "components/Form"
 import utils from "utils"
-import {
-    Card,
-    CardTitle,
-    CardHeader,
-    CardBody,
-    Button,
-    CardImg,
-    CardText,
-    CardSubtitle
-} from "reactstrap"
+import { Card, CardTitle, CardBody, Button, CardImg, CardText, CardSubtitle } from "reactstrap"
 
 export default ({ trip, onDelete, header, to }) => (
     <Card>

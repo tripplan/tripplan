@@ -1,6 +1,4 @@
-import DestinationForm from "containers/DestinationForm"
-import Form from "components/Form"
-import { Card, CardTitle, CardHeader, CardBody, Button, CardImg, CardText } from "reactstrap"
+import { Card, CardTitle, CardBody, Button, CardImg, CardText } from "reactstrap"
 
 export default ({ destination, onDelete, header, to }) => (
     <Card>

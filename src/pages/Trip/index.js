@@ -15,18 +15,14 @@ export default class extends React.Component {
             <Placeholder delayMS={500} ready={response[0]} fallback={Spinner}>
                 {() => (
                     <>
-                        <TripDetails
-                            trip={response[0]}
-                            onSave={trip => api.db.trips.update(trip).then(refresh)}
-                        />
+                        <TripDetails trip={response[0]} onSave={trip => api.db.trips.update(trip).then(refresh)} />
                         <Button
                             onClick={() =>
                                 api.db.destinations
                                     .add({
                                         people: response[0].people,
                                         title: "No Title",
-                                        image:
-                                            "https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180",
+                                        image: "https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180",
                                         startDate: new Date(),
                                         tripId: parseInt(this.props.match.params.tripId)
                                     })

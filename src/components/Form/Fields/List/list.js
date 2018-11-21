@@ -1,13 +1,4 @@
-import {
-    ListGroup,
-    ListGroupItem,
-    Card,
-    CardFooter,
-    CardHeader,
-    CardBody,
-    Button,
-    ButtonGroup
-} from "reactstrap"
+import { Card, CardFooter, CardHeader, CardBody, Button, ButtonGroup } from "reactstrap"
 
 export default class extends React.Component {
     static Head = props => <CardHeader {...props} />

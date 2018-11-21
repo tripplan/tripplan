@@ -17,8 +17,7 @@ class Component extends React.Component {
                 <Button
                     onClick={() => {
                         const people = [this.props.auth.user.id]
-                        const image =
-                            "https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
+                        const image = "https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
                         const title = "No Title"
                         api.db.trips.add({ title, image, people }).then(refresh)
                     }}

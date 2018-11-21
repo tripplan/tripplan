@@ -1,13 +1,9 @@
 import { Input, InputGroup, InputGroupAddon } from "reactstrap"
 
-export default ({ config, onChange, value }) => (
+export default ({ label, placeholder, sufix, setValue, value }) => (
     <InputGroup>
-        {config.prefix && <InputGroupAddon addonType="prepend">{config.prefix}</InputGroupAddon>}
-        <Input
-            value={value || ""}
-            placeholder={config.placeholder}
-            onChange={e => onChange(e.target.value)}
-        />
-        {config.sufix && <InputGroupAddon addonType="append">{config.sufix}</InputGroupAddon>}
+        {label && <InputGroupAddon addonType="prepend">{label}</InputGroupAddon>}
+        <Input value={value || ""} placeholder={placeholder} onChange={e => setValue(e.target.value)} />
+        {sufix && <InputGroupAddon addonType="append">{sufix}</InputGroupAddon>}
     </InputGroup>
 )
