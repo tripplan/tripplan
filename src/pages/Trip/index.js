@@ -23,10 +23,10 @@ export default class extends React.Component {
             <Placeholder delayMS={500} ready={response[0]} fallback={Spinner}>
                 {trip => (
                     <Grid container spacing={16}>
-                        <Grid item sm={12} md={6}>
+                        <Grid item xs={12}>
                             <TripDetails trip={trip} onSave={trip => api.db.trips.update(trip).then(refresh)} />
                         </Grid>
-                        <Grid item sm={12}>
+                        <Grid item xs={12}>
                             <Grid container spacing={16}>
                                 <Grid item xs={12} md={4} lg={3}>
                                     <Button
@@ -37,7 +37,7 @@ export default class extends React.Component {
                                             )
                                         }
                                         fullWidth
-                                        style={{ height: 300, position: "relative" }}
+                                        style={{ height: 300 }}
                                     >
                                         <AddIcon />
                                     </Button>

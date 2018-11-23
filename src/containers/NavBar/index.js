@@ -1,12 +1,14 @@
 import Login from "containers/Login"
-import { Button } from "ui"
+import { NavTitle, IconButton } from "ui"
 import AppBar from "@material-ui/core/AppBar"
 import Toolbar from "@material-ui/core/Toolbar"
+import HomeIcon from "@material-ui/icons/Home"
 
 export default () => (
     <AppBar position="static">
-        <Toolbar variant="dense">
-            <Button component={Link} to="/" children="Home" style={{ flexGrow: 1 }} />
+        <Toolbar>
+            <IconButton color="inherit" variant="fab" component={Link} to="/" children={<HomeIcon />} />
+            <NavTitle children="" style={{ flexGrow: 1 }} />
             <Login />
         </Toolbar>
     </AppBar>

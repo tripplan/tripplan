@@ -21,6 +21,16 @@ class Component extends React.Component {
             <Placeholder delayMS={500} ready={response} fallback={Spinner}>
                 {trips => (
                     <Grid container spacing={16}>
+                        <Grid item xs={12} md={4} lg={3}>
+                            <Button
+                                variant="outlined"
+                                onClick={() => this.createNewTrip().then(trip => this.props.history.push(`/trips/${trip.id}`))}
+                                fullWidth
+                                style={{ height: "100%", minHeight: 200 }}
+                            >
+                                <AddIcon />
+                            </Button>
+                        </Grid>
                         {trips.map(trip => (
                             <Grid item xs={12} sm={6} md={4} lg={3} key={trip.id}>
                                 <TripCard
@@ -35,13 +45,6 @@ class Component extends React.Component {
                     </Grid>
                 )}
             </Placeholder>
-            <Button
-                style={{ position: "fixed", bottom: "20px", right: "20px" }}
-                variant="fab"
-                children={<AddIcon />}
-                color="secondary"
-                onClick={() => this.createNewTrip().then(trip => this.props.history.push(`/trips/${trip.id}`))}
-            />
         </Page>
     )
     render() {
