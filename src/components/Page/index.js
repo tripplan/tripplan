@@ -1,15 +1,12 @@
-import { Container, Row, Col } from "reactstrap"
-import Title from "./Title"
-
-export default class extends React.Component {
-    static Title = Title
-    render() {
-        return (
-            <Container style={{ paddingBottom: "3em", paddingTop: "1em" }}>
-                <Row>
-                    <Col>{this.props.children}</Col>
-                </Row>
-            </Container>
-        )
-    }
-}
+export default ({ style, ...props }) => (
+    <div
+        style={{
+            paddingBottom: "3em",
+            paddingTop: "1em",
+            width: "80%",
+            margin: "auto",
+            ...style
+        }}
+        {...props}
+    />
+)

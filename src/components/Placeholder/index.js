@@ -7,7 +7,7 @@ export default class extends React.Component {
         this._startNewTimeoutIfNotReady()
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(prevProps) {
         if (prevProps.ready !== this.props.ready) {
             this._startNewTimeoutIfNotReady()
         }
@@ -40,6 +40,6 @@ export default class extends React.Component {
         const { children, render, ready, fallback = null } = this.props
         const rndr = children || render
 
-        return ready ? rndr() : showPlaceholder ? fallback() : null
+        return ready ? rndr(ready) : showPlaceholder ? fallback(ready) : null
     }
 }

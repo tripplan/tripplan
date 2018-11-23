@@ -5,44 +5,43 @@ import Spinner from "components/Spinner"
 import Page from "components/Page"
 import api from "api"
 import TripCard from "./TripCard"
+import AddIcon from "@material-ui/icons/Add"
 
-import { Row, Col, Button } from "reactstrap"
+import { Grid, Button, Title } from "ui"
 
 class Component extends React.Component {
+    createNewTrip = () => {
+        const people = [this.props.auth.user.id]
+        return api.db.trips.add({ people })
+    }
     renderLayout = ({ response, refresh }) => (
         <Page>
-            <Link to={`/`}>{"<- Home"}</Link>
-            <Page.Title>TRIPS PAGE</Page.Title>
-            <div className="mb-4">
-                <Button
-                    onClick={() => {
-                        const people = [this.props.auth.user.id]
-                        const image = "https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
-                        const title = "No Title"
-                        api.db.trips.add({ title, image, people }).then(refresh)
-                    }}
-                >
-                    Create New Trip
-                </Button>
-            </div>
+            <Button component={Link} to="/" children="<- Home" />
+            <Title>TRIPS</Title>
             <Placeholder delayMS={500} ready={response} fallback={Spinner}>
-                {() => (
-                    <Row>
-                        {response.map(trip => (
-                            <Col sm={12} md={4} lg={3} className="mb-4" key={trip.id}>
+                {trips => (
+                    <Grid container spacing={16}>
+                        {trips.map(trip => (
+                            <Grid item xs={12} sm={6} md={4} lg={3} key={trip.id}>
                                 <TripCard
-                                    to={`/trips/${response[0].id}`}
+                                    to={`/trips/${trip.id}`}
                                     trip={trip}
-                                    header={trip.title || "No Title"}
                                     onDelete={() => {
                                         api.db.trips.delete(trip.id).then(refresh)
                                     }}
                                 />
-                            </Col>
+                            </Grid>
                         ))}
-                    </Row>
+                    </Grid>
                 )}
             </Placeholder>
+            <Button
+                style={{ position: "fixed", bottom: "20px", right: "20px" }}
+                variant="fab"
+                children={<AddIcon />}
+                color="secondary"
+                onClick={() => this.createNewTrip().then(trip => this.props.history.push(`/trips/${trip.id}`))}
+            />
         </Page>
     )
     render() {

@@ -1,26 +1,28 @@
 import Form from "components/Form"
 import { Input } from "components/Form/Fields"
-import { Card, CardHeader, CardBody, Button } from "reactstrap"
+import { Card, CardMedia, CardBody, Button, CardActions } from "ui"
 
-export default ({ trip, onAdd, onDelete, header, onSave }) => (
+export default ({ trip, onAdd, onDelete, onSave }) => (
     <Form initialData={trip}>
         <Card>
-            <CardHeader>{header}</CardHeader>
+            <CardMedia title={trip.title} image={trip.image} height={300} />
             <CardBody>
                 <Input label="Title" path="title" />
                 <Input label="Post Time" path="posttime" />
                 <Input label="Image" path="image" />
                 <Input label="Description" path="description" />
+            </CardBody>
+            <CardActions>
                 <Form.Consumer>
                     {({ data }) => (
                         <>
-                            {onAdd && <Button color="primary" className="mr-3" onClick={() => onAdd(data)} children="Create" />}
-                            {onSave && <Button color="primary" className="mr-3" onClick={() => onSave(data)} children="Save" />}
-                            {onDelete && <Button color="danger" className="mr-3" onClick={() => onDelete(data)} children="Delete" />}
+                            {onAdd && <Button color="primary" onClick={() => onAdd(data)} children="Create" />}
+                            {onSave && <Button color="secondary" onClick={() => onSave(data)} children="Save" />}
+                            {onDelete && <Button color="secondary" onClick={() => onDelete(data)} children="Delete" />}
                         </>
                     )}
                 </Form.Consumer>
-            </CardBody>
+            </CardActions>
         </Card>
     </Form>
 )

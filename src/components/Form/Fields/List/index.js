@@ -1,5 +1,5 @@
 import List from "./list"
-import { Button, Badge } from "reactstrap"
+import { Button, Badge } from "ui"
 
 export default class extends React.Component {
     state = {
@@ -38,8 +38,6 @@ export default class extends React.Component {
                     <span>{label}</span>
                     {!hasFields && (
                         <Button
-                            className="ml-2"
-                            size="sm"
                             onClick={() => {
                                 this.handleAdd()
                                 this.toggleShow(true)
@@ -49,7 +47,7 @@ export default class extends React.Component {
                         </Button>
                     )}
                     {!!hasFields && (
-                        <Button color="info" className="ml-2" size="sm" onClick={() => this.toggleShow(!show)}>
+                        <Button onClick={() => this.toggleShow(!show)}>
                             {show ? "close" : "open"} {!show && <Badge color="light">{fields.length}</Badge>}
                         </Button>
                     )}
@@ -63,7 +61,9 @@ export default class extends React.Component {
                                     <List.Item
                                         onRemove={() => this.handleRemove(i)}
                                         onMoveUp={i > 0 && fields.length > 1 && (() => this.handleSwap(i, i - 1))}
-                                        onMoveDown={i < fields.length - 1 && fields.length > 1 && (() => this.handleSwap(i, i + 1))}
+                                        onMoveDown={
+                                            i < fields.length - 1 && fields.length > 1 && (() => this.handleSwap(i, i + 1))
+                                        }
                                     >
                                         {field}
                                     </List.Item>

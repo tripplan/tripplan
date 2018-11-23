@@ -1,17 +1,12 @@
-// @flow
 import { hot } from "react-hot-loader"
 import Routes from "containers/Routes"
 import AuthProvider from "providers/Auth"
+import CssBaseline from "@material-ui/core/CssBaseline"
 
-/*::
-import React from "react"
-type Props = {}
-type State = {}
-*/
-
-class App extends React.Component /*::<Props, State> */ {
+class App extends React.Component {
     render = () => (
         <AuthProvider>
+            <CssBaseline />
             <Routes />
         </AuthProvider>
     )

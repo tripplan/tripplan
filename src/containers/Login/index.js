@@ -1,10 +1,8 @@
 import { WithAuth } from "providers/Auth"
-import { Button } from "reactstrap"
+import { Button } from "ui"
 
 const LogOutBtn = ({ auth }) => {
-    return auth.loggedIn ? (
-        <Button onClick={() => auth.logOut()}>Log out {auth.user.displayName}</Button>
-    ) : null
+    return auth.loggedIn ? <Button onClick={() => auth.logOut()}>Log out {auth.user.displayName}</Button> : null
 }
 
 export default WithAuth(LogOutBtn)

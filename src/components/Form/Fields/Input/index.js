@@ -1,9 +1,7 @@
-import { Input, InputGroup, InputGroupAddon } from "reactstrap"
+import { Input, FormControl } from "ui"
 
-export default ({ label, placeholder, sufix, setValue, value }) => (
-    <InputGroup>
-        {label && <InputGroupAddon addonType="prepend">{label}</InputGroupAddon>}
-        <Input value={value || ""} placeholder={placeholder} onChange={e => setValue(e.target.value)} />
-        {sufix && <InputGroupAddon addonType="append">{sufix}</InputGroupAddon>}
-    </InputGroup>
+export default ({ label, placeholder, setValue, value }) => (
+    <FormControl fullWidth margin="normal">
+        <Input label={label} value={value} defaultValue={placeholder} onChange={e => setValue(e.target.value)} />
+    </FormControl>
 )

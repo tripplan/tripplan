@@ -1,6 +1,6 @@
 class Fetch extends React.Component {
     static defaultProps = {
-        as: "json",
+        as: r => r,
         using: fetch
     }
     state = {
@@ -15,8 +15,8 @@ class Fetch extends React.Component {
         const refresh = this._fetchData
 
         using(url)
-			.then(process)
-			.then(response =>
+            .then(process)
+            .then(response =>
                 this.setState({
                     response,
                     err: undefined,

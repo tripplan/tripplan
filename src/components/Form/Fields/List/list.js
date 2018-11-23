@@ -1,27 +1,15 @@
-import { Card, CardFooter, CardHeader, CardBody, Button, ButtonGroup } from "reactstrap"
+import { Card, CardActions, CardHeader, CardBody, Button } from "ui"
 
 export default class extends React.Component {
     static Head = props => <CardHeader {...props} />
     static Items = props => <CardBody {...props} />
-    static Footer = props => <CardFooter {...props} />
+    static Footer = props => <CardActions {...props} />
     static Item = ({ onMoveUp, onMoveDown, onRemove, ...props }) => (
         <div className="ListItem">
             <div className="ListItemMenu clearfix mb-2">
-                <ButtonGroup>
-                    {onMoveDown && (
-                        <Button size="sm" color="primary" onClick={onMoveDown}>
-                            ↓
-                        </Button>
-                    )}
-                    {onMoveUp && (
-                        <Button size="sm" color="primary" onClick={onMoveUp}>
-                            ↑
-                        </Button>
-                    )}
-                </ButtonGroup>
-                <Button className="float-right" size="sm" color="danger" onClick={onRemove}>
-                    x
-                </Button>
+                {onMoveDown && <Button onClick={onMoveDown} children="↓" />}
+                {onMoveUp && <Button onClick={onMoveUp} children="↑" />}
+                <Button onClick={onRemove} children="x" />
             </div>
             <div className="ListItemChildren" {...props} />
         </div>

@@ -5,46 +5,55 @@ import Placeholder from "components/Placeholder"
 import Spinner from "components/Spinner"
 import Page from "components/Page"
 import api from "api"
-import { Button, Row, Col } from "reactstrap"
+import { Button, Grid, Title } from "ui"
+import AddIcon from "@material-ui/icons/Add"
 
 export default class extends React.Component {
+    createDestination = ({ people }) => {
+        return api.db.destinations.add({
+            people,
+            tripId: parseInt(this.props.match.params.tripId)
+        })
+    }
+
     renderLayout = ({ response = [], refresh }) => (
         <Page>
-            <Link to={`/trips`}>{"<- Trips"}</Link>
-            <Page.Title>TRIP PAGE</Page.Title>
+            <Button component={Link} to={`/trips`} children="<- Trips" />
+            <Title>TRIP PAGE</Title>
             <Placeholder delayMS={500} ready={response[0]} fallback={Spinner}>
-                {() => (
-                    <>
-                        <TripDetails trip={response[0]} onSave={trip => api.db.trips.update(trip).then(refresh)} />
-                        <Button
-                            onClick={() =>
-                                api.db.destinations
-                                    .add({
-                                        people: response[0].people,
-                                        title: "No Title",
-                                        image: "https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180",
-                                        startDate: new Date(),
-                                        tripId: parseInt(this.props.match.params.tripId)
-                                    })
-                                    .then(refresh, console.error)
-                            }
-                        >
-                            ADD NEW DESTINATION
-                        </Button>
-                        <Row>
-                            {response[0].destinations.map(destination => (
-                                <Col className="mb-4" sm={12} md={4} lg={3} key={destination.id}>
-                                    <DestinationCard
-                                        to={`/trips/${response[0].id}/${destination.id}`}
-                                        destination={destination}
-                                        onDelete={() => {
-                                            api.db.destinations.delete(destination.id).then(refresh)
-                                        }}
-                                    />
-                                </Col>
-                            ))}
-                        </Row>
-                    </>
+                {trip => (
+                    <Grid container spacing={16}>
+                        <Grid item sm={12} md={6}>
+                            <TripDetails trip={trip} onSave={trip => api.db.trips.update(trip).then(refresh)} />
+                        </Grid>
+                        <Grid item sm={12}>
+                            <Grid container spacing={16}>
+                                <Grid item xs={12} md={4} lg={3}>
+                                    <Button
+                                        variant="outlined"
+                                        onClick={() =>
+                                            this.createDestination(trip).then(destination =>
+                                                this.props.history.push(`/trips/${trip.id}/${destination.id}`)
+                                            )
+                                        }
+                                        fullWidth
+                                        style={{ height: 300, position: "relative" }}
+                                    >
+                                        <AddIcon />
+                                    </Button>
+                                </Grid>
+                                {trip.destinations.map(destination => (
+                                    <Grid item xs={12} md={4} lg={3} key={destination.id}>
+                                        <DestinationCard
+                                            to={`/trips/${trip.id}/${destination.id}`}
+                                            destination={destination}
+                                            onDelete={() => api.db.destinations.delete(destination.id).then(refresh)}
+                                        />
+                                    </Grid>
+                                ))}
+                            </Grid>
+                        </Grid>
+                    </Grid>
                 )}
             </Placeholder>
         </Page>

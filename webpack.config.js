@@ -38,7 +38,8 @@ module.exports = {
         }),
         new webpack.ProvidePlugin({
             React: "react",
-            Link: ["react-router-dom", "Link"]
+            Link: ["react-router-dom", "Link"],
+            api: "api"
         }),
         new webpack.DefinePlugin({
             SERVER_URL: JSON.stringify("http://localhost:3000")
